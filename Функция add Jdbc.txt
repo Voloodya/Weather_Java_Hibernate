@@ -1,0 +1,34 @@
+public void addInformationPogoda(PogodaEntity pogoda) throws SQLException {
+        PreparedStatement preparedStatement=null; //PreparedStatement наследует от Statement и отличается от последнего следующим
+                                            //Объект Statement используется при простых SQL-запросах.
+                                            //Объект PreparedStatement используется в SQL-запросах с одним или более входными параметрами
+                                            // (IN parameters). PreparedStatement содержит группу методов, устанавливающих значения
+                                            // входных параметров, которые отсылаются в БД при выполнении запроса.
+        String sqlCommand="INSERT INTO pogoda (id_punkt, Data_, t_noh, t_utro, t_day, t_veher, Vlagnosty, Davlenie, id_osadky_noh, id_osadky_utro, id_osadky_day, id_osadky_veher, Skorosty_vetra, Napravlenie_vetra, Temperatura_voda)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            preparedStatement=connection.prepareStatement(sqlCommand);
+            preparedStatement.setInt(1,pogoda.getIdPogoda());
+            preparedStatement.setDate(2,pogoda.getData());
+            preparedStatement.setInt(3,pogoda.gettNoh());
+            preparedStatement.setInt(4,pogoda.gettUtro());
+            preparedStatement.setInt(5,pogoda.gettDay());
+            preparedStatement.setInt(6,pogoda.gettVeher());
+            preparedStatement.setInt(7,pogoda.getVlagnosty());
+            preparedStatement.setInt(8,pogoda.getDavlenie());
+            preparedStatement.setString(9,pogoda.getAtmosfernaeYvleniyByIdOsadkyNoh());
+            preparedStatement.setString(10,pogoda.gettVeher());
+            preparedStatement.setString(11,pogoda.gettVeher());
+            preparedStatement.setString(12,pogoda.gettVeher());
+            preparedStatement.setInt(13,pogoda.getSkorostyVetra());
+            preparedStatement.setInt(14,pogoda.getVeterByNapravlenieVetra());
+            preparedStatement.setInt(15,pogoda.getTemperaturaVoda());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if(preparedStatement!=null) preparedStatement.close();
+        }
+
+
+    }
